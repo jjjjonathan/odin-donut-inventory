@@ -1,7 +1,8 @@
 const Category = require('../models/category');
 
-exports.category_list = (req, res) => {
-  res.send('All categories');
+exports.category_list = async (req, res) => {
+  const categories = await Category.find({});
+  res.render('category_list', { title: 'All categories', categories });
 };
 
 exports.category_detail = (req, res) => {

@@ -57,7 +57,7 @@ exports.category_create_post = [
 exports.category_delete_get = async (req, res) => {
   const category = await Category.findById(req.params.id);
   const items = await Item.find({ category });
-  console.log(items && items.length);
+
   res.render('category_delete', {
     title: `Delete ${category.name}`,
     category,
@@ -68,7 +68,13 @@ exports.category_delete_get = async (req, res) => {
 exports.category_delete_post = async (req, res) => {
   const category = await Category.findById(req.params.id);
   const items = await Item.find({ category });
-  // TODO finish
+
+  if (items && items.length) {
+    res.redirect(`${category.url}/delete`);
+  } else {
+    await Category.findByIdAndDelete(req.params.id);
+    res.redirect('/inventory/categories');
+  }
 };
 
 exports.category_update_get = async (req, res) => {

@@ -24,7 +24,7 @@ exports.category_create_post = [
 
   async (req, res) => {
     const errors = validationResult(req);
-    console.log(errors);
+
     let donut;
 
     if (req.body.donut) {
@@ -41,7 +41,6 @@ exports.category_create_post = [
 
     if (!errors.isEmpty()) {
       // Validation errors. Rerender form with immediate validation
-      // TODO make it render inputted data
       res.render('category_form', {
         title: 'New Category',
         category,

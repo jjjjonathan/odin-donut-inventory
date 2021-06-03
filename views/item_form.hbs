@@ -4,18 +4,18 @@
   </h2>
 </div>
 <div class="ui attached bottom segment">
-  <form class="ui form">
+  <form class="ui form" method="POST" action="">
     <div class="field">
       <label>
         Item Name
       </label>
-      <input type="text" name="name" placeholder="Item Name" />
+      <input type="text" name="name" placeholder="Item Name" value="{{#if item}}{{item.name}}{{/if}}" />
     </div>
     <div class="field">
       <label>
         Description
       </label>
-      <input type="text" name="description" placeholder="Description" />
+      <input type="text" name="description" placeholder="Description" value="{{#if item}}{{item.description}}{{/if}}" />
     </div>
     <div class="field">
       <label>
@@ -44,7 +44,7 @@
         <div class="ui label">
           $
         </div>
-        <input type="text" name="price" placeholder="0.99" />
+        <input type="text" name="price" placeholder="0.99" value="{{#if item}}{{item.price}}{{/if}}" />
       </div>
     </div>
     <div class="field">
@@ -56,6 +56,7 @@
         min="0"
         name="numberInStock"
         placeholder="# in stock"
+        value="{{#if item}}{{item.numberInStock}}{{/if}}"
       />
     </div>
     <button class="ui button" type="submit">
@@ -68,6 +69,8 @@
 {{#if validate}}
   <script>
     $(document).ready(() => {
+      $('.ui.selection.dropdown')
+        .dropdown('set selected', "{{item.category}}");
       $('.ui.form').form('validate form')
     });
   </script>

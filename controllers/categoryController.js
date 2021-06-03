@@ -54,8 +54,9 @@ exports.category_create_post = [
   },
 ];
 
-exports.category_delete_get = (req, res) => {
-  res.send('TODO: Category delete GET');
+exports.category_delete_get = async (req, res) => {
+  const category = await Category.findById(req.params.id);
+  res.render('category_delete', { title: `Delete ${category.name}`, category });
 };
 
 exports.category_delete_post = (req, res) => {

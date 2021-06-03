@@ -13,7 +13,7 @@ exports.category_detail = async (req, res) => {
 };
 
 exports.category_create_get = (req, res) => {
-  res.send('TODO: Category create GET');
+  res.render('category_form', { title: 'New Category' });
 };
 
 exports.category_create_post = (req, res) => {

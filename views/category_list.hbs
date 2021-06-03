@@ -1,6 +1,10 @@
 <h1>
   {{title}}
 </h1>
+<a class="ui large labeled icon button" href="/inventory/categories/create">
+  <i class="add icon"></i>
+  Add new category
+</a>
 <div class="ui divided link items">
   {{#each categories}}
     <a class="item" href={{this.url}}>

@@ -1,0 +1,34 @@
+<div class="ui top attached block header">
+  <h2>
+    {{title}}
+  </h2>
+</div>
+<div class="ui attached bottom segment">
+  <form class="ui form">
+    <div class="field">
+      <label>
+        Category Name
+      </label>
+      <input type="text" name="name" placeholder="Category Name" />
+    </div>
+    <div class="field">
+      <label>
+        Description
+      </label>
+      <input type="text" name="description" placeholder="Description" />
+    </div>
+    <div class="field">
+      <div class="ui toggle checkbox">
+        <input type="checkbox" checked name="donuts" />
+        <label>
+          Category for donuts
+        </label>
+      </div>
+    </div>
+    <button class="ui button" type="submit">
+      Submit
+    </button>
+    <div class="ui error message"></div>
+  </form>
+</div>
+<script src="/javascript/categoryFormValidator.js"></script>

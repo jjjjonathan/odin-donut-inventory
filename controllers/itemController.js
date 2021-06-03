@@ -63,12 +63,14 @@ exports.item_create_post = [
   },
 ];
 
-exports.item_delete_get = (req, res) => {
-  res.send('TODO: Item delete GET');
+exports.item_delete_get = async (req, res) => {
+  const item = await Item.findById(req.params.id);
+  res.render('item_delete', { title: `Delete ${item.name}`, item });
 };
 
-exports.item_delete_post = (req, res) => {
-  res.send('TODO: Item delete POST');
+exports.item_delete_post = async (req, res) => {
+  await Item.findByIdAndDelete(req.params.id);
+  res.redirect('/inventory/items');
 };
 
 exports.item_update_get = (req, res) => {

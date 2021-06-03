@@ -13,7 +13,11 @@ const ItemSchema = new mongoose.Schema({
 });
 
 ItemSchema.virtual('url').get(function getUrl() {
-  return `/inventory/item/${this._id}`;
+  return `/inventory/items/${this._id}`;
+});
+
+ItemSchema.virtual('formattedPrice').get(function getFormattedPrice() {
+  return `$${this.price}`;
 });
 
 module.exports = mongoose.model('Item', ItemSchema);

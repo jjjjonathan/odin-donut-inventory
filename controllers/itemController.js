@@ -1,15 +1,19 @@
 const Item = require('../models/item');
+const Category = require('../models/category');
 
-exports.item_list = (req, res) => {
-  res.send('TODO: All items');
+exports.item_list = async (req, res) => {
+  const items = await Item.find({}).populate('category');
+  res.render('item_list', { title: 'All items', items });
 };
 
-exports.item_detail = (req, res) => {
-  res.send('TODO: Item detail');
+exports.item_detail = async (req, res) => {
+  const item = await Item.findById(req.params.id).populate('category');
+  res.render('item_detail', { title: item.name, item });
 };
 
-exports.item_create_get = (req, res) => {
-  res.send('TODO: Item create GET');
+exports.item_create_get = async (req, res) => {
+  const categories = await Category.find({});
+  res.render('item_form', { title: 'Add new item', categories });
 };
 
 exports.item_create_post = (req, res) => {

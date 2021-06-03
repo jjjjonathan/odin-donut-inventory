@@ -1,15 +1,22 @@
 <h1>
   {{title}}
 </h1>
+<a class="ui large labeled icon button" href="/inventory/items/create">
+  <i class="add icon"></i>
+  Add new item
+</a>
 <div class="ui divided link items">
-  {{#each categories}}
+  {{#each items}}
     <a class="item" href={{this.url}}>
-      <div class="ui tiny image">
+      <div class="ui small image">
         <img src="https://fomantic-ui.com/images/wireframe/image.png" />
       </div>
       <div class="middle aligned content">
         <div class="header">
           {{this.name}}
+        </div>
+        <div class="meta">
+          {{this.category.name}}
         </div>
         <div class="description">
           {{this.description}}

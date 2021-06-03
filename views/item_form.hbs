@@ -1,0 +1,56 @@
+<div class="ui top attached block header">
+  <h2>
+    {{title}}
+  </h2>
+</div>
+<div class="ui attached bottom segment">
+  <form class="ui form">
+    <div class="field">
+      <label>
+        Item Name
+      </label>
+      <input type="text" name="item-name" placeholder="Item Name" />
+    </div>
+    <div class="field">
+      <label>
+        Description
+      </label>
+      <input type="text" name="description" placeholder="Description" />
+    </div>
+    <div class="field">
+      <label>
+        Category
+      </label>
+      <select class="ui fluid dropdown">
+        <option value="">
+          Category
+        </option>
+        {{#each categories}}
+          <option value={{this.id}}>
+            {{this.name}}
+          </option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="field">
+      <label>
+        Price
+      </label>
+      <div class="ui labeled input">
+        <div class="ui label">
+          $
+        </div>
+        <input type="text" name="price" placeholder="Price" />
+      </div>
+    </div>
+    <div class="field">
+      <label>
+        # in stock
+      </label>
+      <input type="number" name="numberInStock" placeholder="# in stock" />
+    </div>
+    <button class="ui button" type="submit">
+      Submit
+    </button>
+  </form>
+</div>

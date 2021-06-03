@@ -68,10 +68,12 @@ exports.category_delete_get = async (req, res) => {
 exports.category_delete_post = async (req, res) => {
   const category = await Category.findById(req.params.id);
   const items = await Item.find({ category });
+  // TODO finish
 };
 
-exports.category_update_get = (req, res) => {
-  res.send('TODO: Category update GET');
+exports.category_update_get = async (req, res) => {
+  const category = await Category.findById(req.params.id);
+  res.render('category_form', { title: `Update ${category.name}`, category });
 };
 
 exports.category_update_post = (req, res) => {

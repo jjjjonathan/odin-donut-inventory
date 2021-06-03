@@ -82,6 +82,39 @@ exports.category_update_get = async (req, res) => {
   res.render('category_form', { title: `Update ${category.name}`, category });
 };
 
-exports.category_update_post = (req, res) => {
-  res.send('TODO: Category update POST');
-};
+exports.category_update_post = [
+  body('name').exists({ checkFalsy: true }).trim().escape(),
+  body('description').exists({ checkFalsy: true }).trim().escape(),
+
+  async (req, res) => {
+    const errors = validationResult(req);
+
+    let donut;
+
+    if (req.body.donut) {
+      donut = true;
+    } else {
+      donut = false;
+    }
+
+    const category = new Category({
+      name: req.body.name,
+      description: req.body.description,
+      donut,
+      _id: req.params.id,
+    });
+
+    if (!errors.isEmpty()) {
+      // Validation errors. Rerender form with immediate validation
+      res.render('category_form', {
+        title: `Update ${category.name}`,
+        category,
+        validate: true,
+      });
+    } else {
+      // Data is valid, save
+      await Category.findByIdAndUpdate(req.params.id, category);
+      res.redirect(category.url);
+    }
+  },
+];

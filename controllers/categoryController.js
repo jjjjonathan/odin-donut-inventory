@@ -1,3 +1,5 @@
+const { body, validationResult } = require('express-validator');
+
 const Category = require('../models/category');
 const Item = require('../models/item');
 
@@ -16,9 +18,42 @@ exports.category_create_get = (req, res) => {
   res.render('category_form', { title: 'New Category' });
 };
 
-exports.category_create_post = (req, res) => {
-  res.send('TODO: Category create POST');
-};
+exports.category_create_post = [
+  body('name').exists({ checkFalsy: true }).trim().escape(),
+  body('description').exists({ checkFalsy: true }).trim().escape(),
+
+  async (req, res) => {
+    const errors = validationResult(req);
+    console.log(errors);
+    let donut;
+
+    if (req.body.donut) {
+      donut = true;
+    } else {
+      donut = false;
+    }
+
+    const category = new Category({
+      name: req.body.name,
+      description: req.body.description,
+      donut,
+    });
+
+    if (!errors.isEmpty()) {
+      // Validation errors. Rerender form with immediate validation
+      // TODO make it render inputted data
+      res.render('category_form', {
+        title: 'New Category',
+        category,
+        validate: true,
+      });
+    } else {
+      // Data is valid, save
+      await category.save();
+      res.redirect(category.url);
+    }
+  },
+];
 
 exports.category_delete_get = (req, res) => {
   res.send('TODO: Category delete GET');

@@ -2,7 +2,7 @@
 $(document).ready(function () {
   $('.ui.form').form({
     fields: {
-      email: {
+      name: {
         identifier: 'name',
         rules: [
           {
@@ -11,7 +11,7 @@ $(document).ready(function () {
           },
         ],
       },
-      password: {
+      description: {
         identifier: 'description',
         rules: [
           {

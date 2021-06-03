@@ -4,22 +4,32 @@
   </h2>
 </div>
 <div class="ui attached bottom segment">
-  <form class="ui form">
+  <form class="ui form" method="POST" action="">
     <div class="field">
       <label>
         Category Name
       </label>
-      <input type="text" name="name" placeholder="Category Name" />
+      <input
+        type="text"
+        name="name"
+        placeholder="Category Name"
+        value="{{#if category}}{{category.name}}{{/if}}"
+      />
     </div>
     <div class="field">
       <label>
         Description
       </label>
-      <input type="text" name="description" placeholder="Description" />
+      <input
+        type="text"
+        name="description"
+        placeholder="Description"
+        value="{{#if category}}{{category.description}}{{/if}}"
+      />
     </div>
     <div class="field">
       <div class="ui toggle checkbox">
-        <input type="checkbox" checked name="donuts" />
+        <input type="checkbox" checked name="donut" />
         <label>
           Category for donuts
         </label>
@@ -32,3 +42,10 @@
   </form>
 </div>
 <script src="/javascript/categoryFormValidator.js"></script>
+{{#if validate}}
+  <script>
+    $(document).ready(() => {
+      $('.ui.form').form('validate form')
+    });
+  </script>
+{{/if}}

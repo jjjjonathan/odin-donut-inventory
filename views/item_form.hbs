@@ -9,7 +9,7 @@
       <label>
         Item Name
       </label>
-      <input type="text" name="item-name" placeholder="Item Name" />
+      <input type="text" name="name" placeholder="Item Name" />
     </div>
     <div class="field">
       <label>
@@ -21,16 +21,20 @@
       <label>
         Category
       </label>
-      <select class="ui fluid dropdown">
-        <option value="">
+      <div class="ui selection dropdown">
+        <input type="hidden" name="category" />
+        <i class="dropdown icon"></i>
+        <div class="default text">
           Category
-        </option>
-        {{#each categories}}
-          <option value={{this.id}}>
-            {{this.name}}
-          </option>
-        {{/each}}
-      </select>
+        </div>
+        <div class="menu">
+          {{#each categories}}
+            <div class="item" data-value={{this.id}}>
+              {{this.name}}
+            </div>
+          {{/each}}
+        </div>
+      </div>
     </div>
     <div class="field">
       <label>
@@ -40,17 +44,31 @@
         <div class="ui label">
           $
         </div>
-        <input type="text" name="price" placeholder="Price" />
+        <input type="text" name="price" placeholder="0.99" />
       </div>
     </div>
     <div class="field">
       <label>
         # in stock
       </label>
-      <input type="number" name="numberInStock" placeholder="# in stock" />
+      <input
+        type="number"
+        min="0"
+        name="numberInStock"
+        placeholder="# in stock"
+      />
     </div>
     <button class="ui button" type="submit">
       Submit
     </button>
+    <div class="ui error message"></div>
   </form>
 </div>
+<script src="/javascript/itemFormValidator.js"></script>
+{{#if validate}}
+  <script>
+    $(document).ready(() => {
+      $('.ui.form').form('validate form')
+    });
+  </script>
+{{/if}}

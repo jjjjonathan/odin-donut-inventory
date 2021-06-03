@@ -66,12 +66,18 @@
   </form>
 </div>
 <script src="/javascript/itemFormValidator.js"></script>
-{{#if validate}}
-  <script>
+{{#if setCategory}}
+<script>
     $(document).ready(() => {
       $('.ui.selection.dropdown')
         .dropdown('set selected', "{{item.category}}");
-      $('.ui.form').form('validate form')
+    });
+  </script>
+{{/if}}
+{{#if validate}}
+  <script>
+    $(document).ready(() => {
+      $('.ui.form').form('validate form');
     });
   </script>
 {{/if}}

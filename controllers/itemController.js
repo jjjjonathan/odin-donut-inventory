@@ -53,6 +53,7 @@ exports.item_create_post = [
         title: 'New Item',
         item,
         categories,
+        setCategory: true,
         validate: true,
       });
     } else {
@@ -73,10 +74,60 @@ exports.item_delete_post = async (req, res) => {
   res.redirect('/inventory/items');
 };
 
-exports.item_update_get = (req, res) => {
-  res.send('TODO: Item update GET');
+exports.item_update_get = async (req, res) => {
+  const item = await Item.findById(req.params.id);
+  const categories = await Category.find({});
+
+  res.render('item_form', {
+    title: `Update ${item.name}`,
+    item,
+    categories,
+    setCategory: true,
+  });
 };
 
-exports.item_update_post = (req, res) => {
-  res.send('TODO: Item update POST');
-};
+exports.item_update_post = [
+  body('name').exists({ checkFalsy: true }).trim().escape(),
+  body('description').exists({ checkFalsy: true }).trim().escape(),
+  body('price')
+    .exists({ checkFalsy: true })
+    .trim()
+    .escape()
+    .isDecimal({ decimal_digits: '2' }),
+  body('numberInStock')
+    .exists({ checkFalsy: true })
+    .trim()
+    .escape()
+    .isInt({ min: 0 }),
+
+  async (req, res) => {
+    const errors = validationResult(req);
+    // eslint-disable-next-line object-curly-newline
+    const { name, description, category, price, numberInStock } = req.body;
+
+    const item = new Item({
+      name,
+      description,
+      category,
+      price,
+      numberInStock,
+      _id: req.params.id,
+    });
+
+    if (!errors.isEmpty()) {
+      // Validation errors. Rerender form with immediate validation
+      const categories = await Category.find({});
+      res.render('item_form', {
+        title: `Update ${item.name}`,
+        item,
+        categories,
+        setCategory: true,
+        validate: true,
+      });
+    } else {
+      // Data is valid, save
+      await Item.findByIdAndUpdate(req.params.id, item);
+      res.redirect(item.url);
+    }
+  },
+];

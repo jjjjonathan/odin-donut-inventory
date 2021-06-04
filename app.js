@@ -1,11 +1,16 @@
 require('dotenv').config();
+
 const createError = require('http-errors');
 const express = require('express');
+
 require('express-async-errors');
+
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const compression = require('compression');
+const helmet = require('helmet');
 
 const indexRouter = require('./routes/index');
 const inventoryRouter = require('./routes/inventory');
@@ -15,7 +20,6 @@ const categoryRouter = require('./routes/categories');
 const app = express();
 
 // Set up mongoose connection
-
 const mongoDB = process.env.MONGODB_URI;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
@@ -25,6 +29,8 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+app.use(helmet());
+app.use(compression());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

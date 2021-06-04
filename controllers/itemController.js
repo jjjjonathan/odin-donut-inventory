@@ -44,6 +44,7 @@ exports.item_create_post = [
       category,
       price,
       numberInStock,
+      imageFilename: req.file.filename,
     });
 
     if (!errors.isEmpty()) {
@@ -111,6 +112,7 @@ exports.item_update_post = [
       category,
       price,
       numberInStock,
+      imageFilename: req.file.filename,
       _id: req.params.id,
     });
 

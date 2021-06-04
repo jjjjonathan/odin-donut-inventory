@@ -1,13 +1,17 @@
 <div class="ui top attached block header">
-  <div class="ui small circular right floated image">
-    <img src="https://fomantic-ui.com/images/wireframe/image.png" />
-  </div>
-  <h2>
-    {{title}}
-  </h2>
-  <div class="meta">
-    Category:
-    {{item.category.name}}
+  <div class="ui two column grid">
+    <div class="column">
+      <h2>
+        {{title}}
+      </h2>
+      <div class="meta">
+        Category:
+        {{item.category.name}}
+      </div>
+    </div>
+    <div class="column">
+      <img class="ui small right floated rounded image" src={{item.imageUrl}} />
+    </div>
   </div>
 </div>
 <div class="ui attached segment">

@@ -10,6 +10,7 @@ const ItemSchema = new mongoose.Schema({
   },
   price: { type: String, required: true },
   numberInStock: { type: Number, required: true },
+  imageFilename: { type: String, required: false },
 });
 
 ItemSchema.virtual('url').get(function getUrl() {
@@ -18,6 +19,13 @@ ItemSchema.virtual('url').get(function getUrl() {
 
 ItemSchema.virtual('formattedPrice').get(function getFormattedPrice() {
   return `$${this.price}`;
+});
+
+ItemSchema.virtual('imageUrl').get(function getImageUrl() {
+  if (this.imageFilename) {
+    return `/images/items/${this.imageFilename}`;
+  }
+  return '/images/items/default.jpg';
 });
 
 module.exports = mongoose.model('Item', ItemSchema);

@@ -1,6 +1,18 @@
-<h2 class="ui top attached block header">
-  {{title}}
-</h2>
+<div class="ui top attached block header">
+  <div class="ui two column grid">
+    <div class="column">
+      <h2>
+        {{title}}
+      </h2>
+    </div>
+    <div class="column">
+      <img
+        class="ui small right floated rounded image"
+        src={{category.imageUrl}}
+      />
+    </div>
+  </div>
+</div>
 <div class="ui attached segment">
   {{category.description}}
 </div>

@@ -1,12 +1,19 @@
 const express = require('express');
+const multer = require('multer');
+const { fileFilter, categoryStorage, limits } = require('../utils/multer');
 const categoryController = require('../controllers/categoryController');
 
+const upload = multer({ storage: categoryStorage, limits, fileFilter });
 const router = express.Router();
 
 router.get('/', categoryController.category_list);
 
 router.get('/create', categoryController.category_create_get);
-router.post('/create', categoryController.category_create_post);
+router.post(
+  '/create',
+  upload.single('image'),
+  categoryController.category_create_post
+);
 
 router.get('/:id', categoryController.category_detail);
 

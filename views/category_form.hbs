@@ -4,7 +4,7 @@
   </h2>
 </div>
 <div class="ui attached bottom segment">
-  <form class="ui form" method="POST" action="">
+  <form class="ui form" method="POST" action="" enctype="multipart/form-data">
     <div class="field">
       <label>
         Category Name
@@ -34,6 +34,10 @@
           Category for donuts
         </label>
       </div>
+    </div>
+    <div class="field">
+      <label>Image</label>
+      <input type="file" name="image" />
     </div>
     <button class="ui button" type="submit">
       Submit

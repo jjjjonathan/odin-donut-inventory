@@ -23,6 +23,7 @@ exports.category_create_post = [
   body('description').exists({ checkFalsy: true }).trim().escape(),
 
   async (req, res) => {
+    console.log(req.file);
     const errors = validationResult(req);
 
     let donut;
@@ -37,6 +38,7 @@ exports.category_create_post = [
       name: req.body.name,
       description: req.body.description,
       donut,
+      imageFilename: req.file.filename,
     });
 
     if (!errors.isEmpty()) {
